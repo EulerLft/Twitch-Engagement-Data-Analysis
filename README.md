@@ -20,7 +20,7 @@ We began by looking at the unique games in `video_play.csv`:
 
 There are 41 games, 
 
-`games_list = ['League of Legends' 'DayZ' 'Dota 2' 'Heroes of the Storm'
+```games_list = ['League of Legends' 'DayZ' 'Dota 2' 'Heroes of the Storm'
  'Counter-Strike: Global Offensive' 'Hearthstone: Heroes of Warcraft'
  'The Binding of Isaac: Rebirth' 'Agar.io' 'Gaming Talk Shows' nan
  'Rocket League' 'World of Tanks' 'ARK: Survival Evolved' 'SpeedRunners'
@@ -31,7 +31,8 @@ There are 41 games,
  'Senran Kagura: Estival Versus' 'The Sims 4' 'You Must Build A Boat'
  'Choice Chamber' 'Music' 'Risk of Rain' 'Grand Theft Auto V' 'Besiege'
  'Super Mario Bros. 3' 'Hektor' 'Bridge Constructor Medieval' 'Lucius'
- 'Blackjack' 'Cities: Skylines']`
+ 'Blackjack' 'Cities: Skylines']
+```
 
 
 ### Unique Streams in Dataset
@@ -39,8 +40,9 @@ We then looked at the unique channels streaming in `chat.csv`:
 
 There are 10 unique channels. 
 
-`channel_list = ['jerry' 'elaine' 'frank' 'estelle' 'george' 'newman' 'susan' 'kramer'
- 'morty' 'helen']`
+```channel_list = ['jerry' 'elaine' 'frank' 'estelle' 'george' 'newman' 'susan' 'kramer'
+ 'morty' 'helen']
+```
 
 ### Games in Dataset
 Look at the top 10 games in the `video_play.csv` data set 
@@ -49,7 +51,8 @@ Look at the top 10 games in the `video_play.csv` data set
 FROM video_play 
 GROUP BY game 
 ORDER BY COUNT(*) DESC
-LIMIT 10;```
+LIMIT 10;
+```
 
 | Game Title | Count |
 | :--- | :--- |
@@ -73,7 +76,8 @@ FROM video_play
 WHERE game = 'League of Legends'
 GROUP BY 1 
 ORDER BY 2 DESC
-LIMIT 10;```
+LIMIT 10;
+```
 
 | Country | LoL Streams |
 | :--- | :--- |
@@ -99,7 +103,8 @@ FROM video_play
 WHERE game = 'Dota 2'
 GROUP BY 1 
 ORDER BY 2 DESC
-LIMIT 10;```
+LIMIT 10;
+```
 
 | Country | Dota 2 Streams |
 | :--- | :--- |
@@ -126,7 +131,8 @@ FROM video_play
 WHERE game = 'Counter-Strike: Global Offensive'
 GROUP BY 1 
 ORDER BY 2 DESC
-LIMIT 10;```
+LIMIT 10;
+```
 
 | Country | CS:GO Streams |
 | :--- | :--- |
@@ -156,7 +162,8 @@ However, regional preferences emerge in the secondary markets, where Dota 2 and 
 ```SELECT player, COUNT(*) AS 'device'
 FROM video_play
 GROUP BY 1 
-ORDER BY 2 DESC;```
+ORDER BY 2 DESC;
+```
 
 | Player/Device | Count |
 | :--- | :--- |
@@ -198,7 +205,8 @@ This classification allows for a more strategic view of which gaming categories 
 FROM video_play
 GROUP BY 1 
 ORDER BY 3 DESC
-LIMIT 10;```
+LIMIT 10;
+```
 
 | Game | Genre | Counts |
 | :--- | :--- | :--- |
@@ -222,7 +230,7 @@ Join the tables and group by game to see which titles generate the most "Chat-to
 
 ### Community Engagement Analysis
 
-To measure how deeply the audience interacts with different types of content, I calculated the Engagement Ratio by joining the viewing logs with chat activity. 
+To measure how deeply the audience interacts with different types of content, we calculate the Engagement Ratio by joining the viewing logs with chat activity. 
 This metric represents the percentage of viewers who transitioned from passive watching to active participation in the community.
 
 | Game | Total Views | Total Messages | Engagement Ratio |
@@ -247,7 +255,8 @@ Mid-sized titles like Hearthstone and World of Tanks strike a balance, maintaini
 
 ```SELECT time 
 FROM video_play 
-LIMIT 1;```
+LIMIT 1;
+```
 
 
 | time | 
@@ -261,10 +270,11 @@ Based on this output, the raw data does not include a timezone offset or a "Z" s
 	COUNT(*) AS 'count'
 FROM video_play
 GROUP BY 1
-ORDER BY 2 DESC;```
+ORDER BY 2 DESC;
+```
 
 The data type of the time column is DATETIME. YYYY-MM-DD HH:MM:SS.
-To determine the peak engagement times for viewers, I used the strftime() function to extract the hour from the time column. 
+To determine the peak engagement times for viewers, we use the strftime() function to extract the hour from the time column. 
 This analysis identifies the specific times of day when the platform experiences its highest traffic, which is essential for scheduling content or maintenance.
 
 | Hour | Stream Count |
@@ -329,12 +339,13 @@ We saw that the largest viewership is focused on North America (US dominant) for
 | 06 | 236 |
 
 
-In the United States, viewership peaks significantly in the evening between 7:00 PM and 10:00 PM (Hours 19-22), which aligns with typical leisure time following work and school hours. 
+In the US, viewership peaks significantly in the evening between 7:00 PM and 10:00 PM (Hours 19-22), which aligns with typical leisure time following work and school hours. 
 While there is still a notable midday bump around 12:00 PM, it is secondary to the prime-time surge. 
 The quietest period remains the early morning, specifically between 6:00 AM and 8:00 AM, marking the daily reset for the American audience.
 
-### Note on Timezone Assumptions: The raw data lacks explicit timezone offsets (e.g., UTC or EST). 
-However, by comparing the peak viewing hours of the United States (Hour 20) against global averages, we can infer that the dataset is recorded in UTC. 
+### Note on Timezone Assumptions: 
+The raw data lacks explicit timezone offsets (e.g., UTC or EST). 
+However, by comparing the peak viewing hours of the US (Hour 20) against global averages, we can infer that the dataset is recorded in UTC. 
 If the data were in a US-based timezone, the global midday peak would imply an unrealistic worldwide surge in viewership during the American lunch hour. 
 Instead, this midday spike represents the alignment of peak evening traffic from European and Middle Eastern markets.
 
@@ -387,10 +398,11 @@ SELECT strftime('%H', v.time) AS 'hour',
 FROM video_play AS v
 LEFT JOIN chat AS c
 	ON v.device_id = c.device_id
-GROUP BY 1;``` 
+GROUP BY 1;
+``` 
 
-I utilized a SQL query to generate a comprehensive mapping of user interaction across a 24-hour cycle, allowing for a direct comparison between passive viewership and active social engagement. 
-By implementing a LEFT JOIN on the device_id column, I was able to capture every unique viewer while simultaneously identifying the subset of those individuals who chose to participate in the chat. 
+We utilized a SQL query to generate a comprehensive mapping of user interaction across a 24-hour cycle, allowing for a direct comparison between passive viewership and active social engagement. 
+By implementing a LEFT JOIN on the device_id column, we capture every unique viewer while simultaneously identifying the subset of those individuals who chose to participate in the chat. 
 This primary dataset was then exported to a CSV file named twitch_hourly_engagement.csv and processed in Python using the Seaborn library to visualize the density of these interactions through a dual-plot analysis.
 This data was then exported to a CSV file named twitch_hourly_engagement.csv and processed in Python using Seaborn to visualize the density of these interactions.
 
