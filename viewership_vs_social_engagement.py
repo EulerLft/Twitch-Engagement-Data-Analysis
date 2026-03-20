@@ -40,6 +40,5 @@ for ax in [ax1, ax2]:
     ax.set_xlabel('Hour of Day (UTC)')
 
 plt.tight_layout()
-plt.show()
-
 plt.savefig('twitch_viewership_vs_engagement_trends.png')
+plt.show()
