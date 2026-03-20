@@ -13,6 +13,9 @@ Key findings indicate that while total viewership reaches its absolute peak at 1
 This suggests that massive midday surges are largely comprised of passive background viewers, whereas specific off-peak hours attract a more dedicated and talkative "hardcore" audience.
 These insights offer a framework for streamers and community managers to optimize their schedules based on engagement quality rather than just sheer audience size.
 
+![Viewership Trends](twitch_viewership_vs_engagement_trends.png)
+
+
 ## Exploratory Data Analysis
 
 ### Unique Games in Dataset
