@@ -43,8 +43,7 @@ We then looked at the unique channels streaming in `chat.csv`:
 
 There are 10 unique channels. 
 
-```channel_list = ['jerry' 'elaine' 'frank' 'estelle' 'george' 'newman' 'susan' 'kramer'
- 'morty' 'helen']
+```channel_list = ['jerry' 'elaine' 'frank' 'estelle' 'george' 'newman' 'susan' 'kramer' 'morty' 'helen']
 ```
 
 ### Games in Dataset
